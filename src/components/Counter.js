@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 // import { createStore } from "redux";
-import { createStore } from "./redux/redux";
-import reducer from "./reducers/counter";
-import "./App.css";
+import { createStore } from "../redux/redux";
+import reducer from "../reducers/counter";
 
 const store = createStore(reducer);
 
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 
-class App extends Component {
+class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = { num: 0 };
@@ -27,16 +26,17 @@ class App extends Component {
     this.unsubscribe();
   }
 
-  increment() {
-    store.dispatch({ type: INCREMENT, amount: 3 });
-  }
-
   render() {
     return (
       <div className="container">
         <h1 className="jumbotron-heading text-center">{this.state.num}</h1>
         <p className="text-center">
-          <button onClick={this.increment} className="btn btn-primary mr-2">
+          <button
+            onClick={() => {
+              store.dispatch({ type: INCREMENT, amount: 3 });
+            }}
+            className="btn btn-primary mr-2"
+          >
             Increase
           </button>
           <button
@@ -53,4 +53,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Counter;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { createStore } from "redux";
+// import { createStore } from "redux";
+import { createStore } from "../redux/redux";
 import reducer from "../reducers/todo";
 
 const store = createStore(reducer);
