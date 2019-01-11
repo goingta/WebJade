@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 // import { createStore } from "redux";
-import { createStore } from "../redux/redux";
-import reducer from "../reducers/counter";
+// import { createStore } from "../redux/redux";
+// import reducer from "../reducers/counter";
+import store from "../store/store";
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
 
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
@@ -17,7 +18,7 @@ class Counter extends Component {
   componentWillMount() {
     this.unsubscribe = store.subscribe(() => {
       this.setState({
-        num: store.getState().num
+        num: store.getState().counter.num
       });
     });
   }

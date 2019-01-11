@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 // import { createStore } from "redux";
-import { createStore } from "../redux/redux";
-import reducer from "../reducers/todo";
+// import { createStore } from "../redux/redux";
+// import reducer from "../reducers/todo";
+import store from "../store/store";
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
 
 export default class Todo extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class Todo extends Component {
 
   componentWillMount() {
     this.unsubscribe = store.subscribe(() => {
-      this.setState(store.getState());
+      this.setState({ list: store.getState().todo.list });
     });
   }
 
