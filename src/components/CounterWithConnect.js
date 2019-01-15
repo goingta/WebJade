@@ -13,7 +13,6 @@ class Counter extends Component {
 
   render() {
     const { num } = this.props;
-    const { store } = this.context;
     return (
       <div className="container">
         <h1 className="jumbotron-heading text-center">{num}</h1>
