@@ -1,16 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Counter from "./components/CounterWithConnect";
-import Provider from "./redux/provider";
+import Counter from "./components/Counter";
+import Todo from "./components/Todo";
 import * as serviceWorker from "./serviceWorker";
-import store from "./store/store";
 
 ReactDOM.render(
   <div>
-    <Provider store={store}>
-      <Counter />
-    </Provider>
+    <Counter />
+    <Todo />
   </div>,
   document.getElementById("root")
 );
