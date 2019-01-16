@@ -37,4 +37,16 @@ const createStore = reducer => {
   };
 };
 
-export { createStore };
+//中间件
+const applyMiddleware = middleware => createStore => reducer => {
+  let store = createStore(reducer);
+  let dispatchHandle = middleware(store); //拿到dispatch句柄
+  let dispatch = dispatchHandle(store.dispatch); //新的dispatch
+  //返回用新的dispatch覆盖原来的store里面的dispatch
+  return {
+    ...store,
+    dispatch
+  };
+};
+
+export { createStore, applyMiddleware };

@@ -34,9 +34,18 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    increase: () => dispatch({ type: INCREMENT, amount: 3 }),
-    decrease: () => dispatch({ type: DECREMENT, amount: 2 })
+    // increase: () => dispatch({ type: INCREMENT, amount: 3 }),
+    // decrease: () => dispatch({ type: DECREMENT, amount: 2 })
+    increase: () => logger(dispatch, { type: INCREMENT, amount: 3 }),
+    decrease: () => logger(dispatch, { type: DECREMENT, amount: 2 })
   };
+};
+
+// 这种拿不到store，而且只能在各个业务逻辑里面做
+const logger = (dispatch, action) => {
+  console.log("before action", action);
+  dispatch(action);
+  console.log("after action", action);
 };
 
 const counterWithConnect = connect(

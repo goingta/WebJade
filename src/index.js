@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Counter from "./components/CounterWithConnect";
+// import Counter from "./components/CounterWithoutMiddleware";
 import Provider from "./redux/provider";
 import * as serviceWorker from "./serviceWorker";
-import store from "./store/store";
+// import store from "./store/store";
+import store from "./store/storeWithMiddleware";
 
 ReactDOM.render(
   <div>
