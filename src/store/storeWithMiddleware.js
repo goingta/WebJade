@@ -22,15 +22,34 @@ const thunk = store => next => action => {
   }
 };
 
+const promise = store => next => action => {
+  if (action.then) {
+    action.then(promiseAction => {
+      next(promiseAction);
+    });
+  } else {
+    next(action);
+  }
+};
+
 const reducer = combineReducers({ counter, todo });
 
 // const store = applyMiddleware(logger)(createStore)(reducer);
-const store = applyMiddleware(thunk)(createStore)(reducer);
+// const store = applyMiddleware(thunk)(createStore)(reducer);
+const store = applyMiddleware(promise)(createStore)(reducer);
 
-store.dispatch(dispatch => {
-  setTimeout(() => {
-    dispatch({ type: INCREMENT, amount: 3 });
-  }, 3000);
-});
+// store.dispatch(dispatch => {
+//   setTimeout(() => {
+//     dispatch({ type: INCREMENT, amount: 3 });
+//   }, 3000);
+// });
+
+store.dispatch(
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ type: INCREMENT, amount: 3 });
+    }, 3000);
+  })
+);
 
 export default store;
