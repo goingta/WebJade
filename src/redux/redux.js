@@ -38,15 +38,22 @@ const createStore = reducer => {
 };
 
 //中间件
-const applyMiddleware = middleware => createStore => reducer => {
+const applyMiddleware = (...middlewares) => createStore => reducer => {
   let store = createStore(reducer);
-  let dispatchHandle = middleware(store); //拿到dispatch句柄
-  let dispatch = dispatchHandle(store.dispatch); //新的dispatch
+  let dispatchHandles = middlewares.map(middleware => middleware(store)); //拿到dispatch句柄
+  let dispatch = compose(...dispatchHandles)(store.dispatch); //新的dispatch
   //返回用新的dispatch覆盖原来的store里面的dispatch
   return {
     ...store,
     dispatch
   };
+};
+
+const compose = (...fns) => (...args) => {
+  let last = fns.pop();
+  return fns.reduceRight((composed, fn) => {
+    return fn(composed);
+  }, last(...args));
 };
 
 export { createStore, applyMiddleware };
